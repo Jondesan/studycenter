@@ -27,10 +27,20 @@ def next_frame():
     else:
         root.after(10, next_frame) # XXX: Fixed animation speed
 
-label = tk.Label(root,
-                 image=photo,
-                 bg=rgb_color((25,31,38)))
 
-label.pack(expand=1, fill=tk.BOTH)
+
+loadingCanvas = tk.Canvas(root, width=400, height=200)
+loadingCanvas.configure(bg = rgb_color((25,31,38)),
+                        highlightthickness = 0)
+
+loadingCanvas.pack(expand = 1,
+                   fill = tk.BOTH)
+
+loadingCanvas.create_image(0,
+                           0,
+                           image = photo,
+                           anchor='nw')
+
+
 root.after_idle(next_frame)
 root.mainloop()
