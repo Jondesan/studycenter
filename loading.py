@@ -12,8 +12,10 @@ def rgb_color(rgb):
 
 root = tk.Tk()
 root.title('Study Center Experimental build')
+root.geometry('400x200')
 photo = tk.PhotoImage(file="img/loading_low.gif")
 gif_index = 0
+
 
 def next_frame():
     global gif_index
@@ -28,19 +30,23 @@ def next_frame():
         root.after(10, next_frame) # XXX: Fixed animation speed
 
 
+mstrFrm = tk.Frame(width=400,
+                   height=200,
+                   bg=rgb_color((25,31,38)))
 
-loadingCanvas = tk.Canvas(root, width=400, height=200)
+loadingCanvas = tk.Canvas(master=mstrFrm)
 loadingCanvas.configure(bg = rgb_color((25,31,38)),
                         highlightthickness = 0)
 
-loadingCanvas.pack(expand = 1,
-                   fill = tk.BOTH)
+mstrFrm.pack(fill=tk.BOTH, expand=True)
 
-loadingCanvas.create_image(0,
-                           0,
+
+loadingCanvas.create_image(loadingCanvas.winfo_width()/2,
+                           loadingCanvas.winfo_height()/2,
                            image = photo,
                            anchor='nw')
 
+loadingCanvas.place(in_=mstrFrm)
 
 root.after_idle(next_frame)
 root.mainloop()
