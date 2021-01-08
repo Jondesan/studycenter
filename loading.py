@@ -37,7 +37,7 @@ def next_frame():
         photo.configure(format="gif -index {}".format(gif_index))
         
         #XXX: Print size parameters for debugging purposes
-        print('(' + str(get_width(loadingCanvas)) + ', ' + str(get_height(loadingCanvas)) + ')')
+        #print('(' + str(get_width(loadingCanvas)) + ', ' + str(get_height(loadingCanvas)) + ')')
         
         
         #XXX:   For some fucktard of a reason moveto isn't a real implementation and doesn't work as it should
