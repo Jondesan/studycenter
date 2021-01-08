@@ -1,52 +1,53 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Jan  3 00:56:49 2021
+Created on Sun Jan  3 02:36:22 2021
 
 @author: jonde
 """
 
 import tkinter as tk
-from PIL import ImageTk,Image
-import random as rnd
-import time
 
+def rgb_color(rgb):
+    return '#%02x%02x%02x' % rgb
 
-loading_icon_path = 'loading.gif'
+root = tk.Tk()
+root.title('Study Center Experimental build')
 
-frames = 80
+photo = tk.PhotoImage(file="img/loading_low.gif")
 
-def load_gif(path):
-    loading_icon = []
-    numberOfFrames = 80
-    for i in range(numberOfFrames):
-        print(str(i+1))
-        loading_icon.append(ImageTk.PhotoImage(file=path, format='gif -index %i' %i))
-    return loading_icon
+#root.geometry('400x200')
 
 
 
-
-gui = tk.Tk()
-gui.title('Graphics')
-
-wndHeight  = 500
-wndWidth   = 500
-
-canvas = tk.Canvas(gui, width = wndWidth, height = wndHeight)
-
-
-
-ball = canvas.create_oval(wndWidth/2,wndHeight/2,100,100,fill='red')
-xspeed = 1
-yspeed = 0
-
-
-while True:
+#def update():
     
-    canvas.move(ball,xspeed,yspeed)
-    gui.update()
-    time.sleep(0.1)
 
 
-#gui.mainloop()
 
+mstrFrm = tk.Frame(width=root.winfo_width(),
+                   height=root.winfo_height(),
+                   bg=rgb_color((25,31,38)))
+
+loadingCanvas = tk.Canvas(master=mstrFrm,
+                          width=root.winfo_screenwidth(),
+                          height=root.winfo_screenheight())
+
+loadingCanvas.configure(bg = rgb_color((25,31,38)),
+                        highlightthickness = 0)
+
+mstrFrm.pack(fill=tk.BOTH, expand=True)
+
+
+loadingCanvas.update_idletasks()
+
+print(str(root.winfo_width()))
+print(str(root.winfo_height()))
+
+loadingCanvas.create_image(root.winfo_screenwidth()/2,
+                           root.winfo_screenheight()/2,
+                           image = photo)
+
+loadingCanvas.pack()
+
+root.update()
+root.mainloop()
